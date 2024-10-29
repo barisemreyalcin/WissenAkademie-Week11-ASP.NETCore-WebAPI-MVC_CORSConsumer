@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Student>
+
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">Student Data From API</div>
+	<div class="panel-body">
+		<table class="table table-bordered" id="studentTable">
+			<tr>
+				<th>Student Number</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Address</th>
+				<th>Phone</th>
+			</tr>
+			@foreach (Student student in Model)
+			{
+				<tr>
+					<td>@student.StudentNumber</td>
+					<td>@student.FirstName</td>
+					<td>@student.LastName</td>
+					<td>@student.Address</td>
+					<td>@student.Phone</td>
+				</tr>
+			}
+		</table>
+	</div>
+</div>

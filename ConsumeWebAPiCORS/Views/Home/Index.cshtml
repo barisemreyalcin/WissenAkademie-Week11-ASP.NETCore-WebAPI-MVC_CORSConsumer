@@ -1,0 +1,53 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+	<p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="panel panel-primary">
+	<div class="panel-heading">Student Data From API</div>
+	<div class="panel-body">
+		<table class="table table-bordered" id="studentTable">
+			<tr>
+				<th>Student Number</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Address</th>
+				<th>Phone</th>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function () {
+		// alert("test");
+		$.ajax({
+			type: "GET",
+			url: "https://localhost:7103/api/Student/GetAllStudents",
+			contentType: "application",
+			dataType: "json",
+			success: function (data) {
+				// alert(data);
+				// alert(JSON.stringify(data));
+				$.each(data, function (i, item) {
+					var rows = "<tr>" +
+						"<td id=StudentNumber>" + item["studentNumber"] + "</td>" +
+ 					"<td id=FirstName>" + item["firstName"] + "</td>" +
+					"<td id=LastName>" + item["lastName"] + "</td>" +
+					"<td id=Address>" + item["address"] + "</td>" +
+					"<td id=Phone>" + item["phone"] + "</td>" +
+					"</tr>";
+
+					$("#studentTable").append(rows);
+				})
+			},
+			error: function (data) {
+				alert(data.responseText);
+			}
+		})
+	})
+</script>
